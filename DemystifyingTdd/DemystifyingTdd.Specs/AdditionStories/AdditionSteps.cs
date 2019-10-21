@@ -57,10 +57,10 @@ namespace DemystifyingTdd.Specs.AdditionStories
         }
         
         [Then(@"the result should be (.*)")]
-        public void ThenTheResultShouldBe(int expectedResult)
+        public void ThenTheResultShouldBe(decimal expectedResult)
         {
             _response.StatusCode.Should().Be(HttpStatusCode.OK);
-            var result = _response.Content.ReadAsAsync<int>().Result;
+            var result = _response.Content.ReadAsAsync<decimal>().Result;
             result.Should().Be(expectedResult);
         }
     }
