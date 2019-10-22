@@ -100,6 +100,44 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
+        [Xunit.FactAttribute(DisplayName="Add a list of numbers")]
+        [Xunit.TraitAttribute("FeatureTitle", "Addition")]
+        [Xunit.TraitAttribute("Description", "Add a list of numbers")]
+        public virtual void AddAListOfNumbers()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add a list of numbers", null, ((string[])(null)));
+#line 13
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "number1",
+                        "number2",
+                        "number3",
+                        "number4",
+                        "number5",
+                        "number6"});
+            table1.AddRow(new string[] {
+                        "12.3",
+                        "2.2",
+                        "0.58",
+                        "-0.72",
+                        "1.1",
+                        "0"});
+#line 14
+ testRunner.Given("I have the following numbers", ((string)(null)), table1, "Given ");
+#line 17
+ testRunner.And("A web api client", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 18
+ testRunner.And("an additions url of \"/api/additions\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 19
+ testRunner.When("I calculate the addition result", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 20
+ testRunner.Then("the result should be 15.46", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
         [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.0.0.0")]
         [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
         public class FixtureData : System.IDisposable

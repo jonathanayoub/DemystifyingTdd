@@ -1,5 +1,6 @@
 ﻿using DemystifyingTdd.Api.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace DemystifyingTdd.Api.Controllers
 {
@@ -10,7 +11,7 @@ namespace DemystifyingTdd.Api.Controllers
         [HttpPost]
         public IActionResult Add(Addition additionData)
         {
-            return Ok(additionData.Number1 + additionData.Number2);
+            return Ok(additionData.Numbers.Sum());
         }
     }
 }
