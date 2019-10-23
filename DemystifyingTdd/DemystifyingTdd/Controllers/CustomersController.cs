@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DemystifyingTdd.Api.Models;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace DemystifyingTdd.Api.Controllers
 {
@@ -8,7 +10,14 @@ namespace DemystifyingTdd.Api.Controllers
     {
         public IActionResult GetCustomers()
         {
-            return Ok(0);
+            return Ok(new List<Customer>
+            {
+                new Customer(),
+                new Customer(),
+                new Customer(),
+                new Customer(),
+                new Customer()
+            });
         }
     }
 }

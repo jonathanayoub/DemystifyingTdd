@@ -1,5 +1,6 @@
 ﻿using DemystifyingTdd.Api;
 using DemystifyingTdd.Api.Data;
+using DemystifyingTdd.Api.Models;
 using DemystifyingTdd.Specs.Shared;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -23,6 +24,8 @@ namespace DemystifyingTdd.Specs.CustomerApiStories
         private IServiceScope _scope;
         private IEnumerable<CustomerEntity> _customers;
         private IEnumerable<SubscriptionEntity> _subscriptions;
+        private IEnumerable<CustomerData> _customerDataTable;
+        private IEnumerable<SubscriptionData> _subscriptionDataTable;
 
         public CustomerApiSteps(WebApplicationFactory<Startup> webApplicationFactory)
             : base(webApplicationFactory)
@@ -39,8 +42,8 @@ namespace DemystifyingTdd.Specs.CustomerApiStories
         [Given(@"I have the following customer data")]
         public void GivenIHaveTheFollowingCustomerData(Table table)
         {
-            var customerDataTable = table.CreateSet<CustomerData>();
-            _customers = BuildCustomerData(customerDataTable);
+            _customerDataTable = table.CreateSet<CustomerData>();
+            _customers = BuildCustomerData(_customerDataTable);
         }
 
         private IEnumerable<CustomerEntity> BuildCustomerData(
@@ -62,8 +65,8 @@ namespace DemystifyingTdd.Specs.CustomerApiStories
         [Given(@"the following subscriptions")]
         public void GivenTheFollowingSubscriptions(Table table)
         {
-            var subscriptionDataTable = table.CreateSet<SubscriptionData>();
-            _subscriptions = BuildSubscriptionData(subscriptionDataTable);
+            _subscriptionDataTable = table.CreateSet<SubscriptionData>();
+            _subscriptions = BuildSubscriptionData(_subscriptionDataTable);
 
             AssociateCustomerSubscriptions();
 
@@ -122,7 +125,35 @@ namespace DemystifyingTdd.Specs.CustomerApiStories
         [Then(@"the customer data is returned")]
         public void ThenTheCustomerDataIsReturned()
         {
-            ScenarioContext.Current.Pending();
+            var result = _response.Content.ReadAsAsync<IEnumerable<Customer>>().Result;
+            var expectedResult = BuildExpectedResult();
+            result.Should().BeEquivalentTo(expectedResult);
+        }
+
+        private IList<Customer> BuildExpectedResult()
+        {
+            return _customers.Select(customer =>
+            {
+                var matchingSubscriptions = _subscriptions
+                    .Where(sub => sub.CustomerId == customer.Id)
+                    .Select(sd => new Subscription
+                    {
+                        Title = sd.Title
+                    }
+                    ).ToList();
+                return new Customer
+                {
+                    Id = customer.Id,
+                    FirstName = customer.FirstName,
+                    LastName = customer.LastName,
+                    Address = customer.Address,
+                    City = customer.City,
+                    State = customer.State,
+                    ZipCode = customer.ZipCode,
+                    FavoriteColor = customer.FavoriteColor,
+                    Subscriptions = matchingSubscriptions
+                };
+            }).ToList();
         }
 
         [AfterScenario]
