@@ -1,6 +1,6 @@
-﻿using DemystifyingTdd.Api.Models;
+﻿using DemystifyingTdd.Api.Handlers;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+using System;
 
 namespace DemystifyingTdd.Api.Controllers
 {
@@ -8,16 +8,18 @@ namespace DemystifyingTdd.Api.Controllers
     [ApiController]
     public class CustomersController : ControllerBase
     {
+        private readonly ICustomersHandler _customersHandler;
+
+        public CustomersController(ICustomersHandler customersHandler)
+        {
+            _customersHandler = customersHandler
+                                ?? throw new ArgumentNullException(nameof(customersHandler));
+        }
+
         public IActionResult GetCustomers()
         {
-            return Ok(new List<Customer>
-            {
-                new Customer(),
-                new Customer(),
-                new Customer(),
-                new Customer(),
-                new Customer()
-            });
+            var customerList = _customersHandler.GetAll();
+            return Ok(customerList);
         }
     }
 }
