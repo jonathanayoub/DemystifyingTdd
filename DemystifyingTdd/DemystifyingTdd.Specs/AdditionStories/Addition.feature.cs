@@ -89,12 +89,10 @@ this.ScenarioInitialize(scenarioInfo);
 #line 7
  testRunner.Given("I want to add 50 and 70", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 8
- testRunner.And("A web api client", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 9
  testRunner.And("an additions url of \"/api/additions\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 10
+#line 9
  testRunner.When("I calculate the addition result", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 11
+#line 10
  testRunner.Then("the result should be 120", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -106,7 +104,7 @@ this.ScenarioInitialize(scenarioInfo);
         public virtual void AddAListOfNumbers()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add a list of numbers", null, ((string[])(null)));
-#line 13
+#line 12
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
@@ -124,15 +122,13 @@ this.ScenarioInitialize(scenarioInfo);
                         "-0.72",
                         "1.1",
                         "0"});
-#line 14
+#line 13
  testRunner.Given("I have the following numbers", ((string)(null)), table1, "Given ");
-#line 17
- testRunner.And("A web api client", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 18
+#line 16
  testRunner.And("an additions url of \"/api/additions\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 19
+#line 17
  testRunner.When("I calculate the addition result", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 20
+#line 18
  testRunner.Then("the result should be 15.46", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

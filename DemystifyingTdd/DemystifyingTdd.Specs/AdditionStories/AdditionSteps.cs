@@ -1,4 +1,5 @@
 ﻿using DemystifyingTdd.Api;
+using DemystifyingTdd.Specs.Shared;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
 using System;
@@ -13,27 +14,15 @@ using TechTalk.SpecFlow.Assist;
 namespace DemystifyingTdd.Specs.AdditionStories
 {
     [Binding]
-    public class AdditionSteps
+    public class AdditionSteps : ApiFeatureBase
     {
-        private readonly WebApplicationFactory<Startup> _webApplicationFactory;
-        private HttpClient _client;
         private HttpResponseMessage _response;
         private string _requestUrl;
         private IEnumerable<decimal> _numbers;
 
         public AdditionSteps(WebApplicationFactory<Startup> webApplicationFactory)
-        {
-            _webApplicationFactory = webApplicationFactory;
-        }
-
-        [Given(@"A web api client")]
-        public void GivenAWebApiClient()
-        {
-            _client = _webApplicationFactory.CreateClient(new WebApplicationFactoryClientOptions
-            {
-                BaseAddress = new Uri($"http://localhost/")
-            });
-        }
+            : base(webApplicationFactory)
+        { }
 
         [Given(@"I want to add (.*) and (.*)")]
         public void GivenIWantToAddAnd(int number1, int number2)
@@ -62,7 +51,7 @@ namespace DemystifyingTdd.Specs.AdditionStories
             var uri = new Uri(_requestUrl, UriKind.Relative);
             var postData = $"{{\"numbers\": [{string.Join(",", _numbers)}]}}";
             var content = new StringContent(postData, Encoding.UTF8, "application/json");
-            _response = _client.PostAsync(uri, content).Result;
+            _response = HttpClient.PostAsync(uri, content).Result;
         }
 
         [Then(@"the result should be (.*)")]
