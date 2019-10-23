@@ -8,19 +8,19 @@ namespace DemystifyingTdd.Specs.Shared
 {
     public class ApiFeatureBase
     {
-        private readonly WebApplicationFactory<Startup> _webApplicationFactory;
+        protected readonly WebApplicationFactory<Startup> WebApplicationFactory;
         protected HttpClient HttpClient;
 
         public ApiFeatureBase(
             WebApplicationFactory<Startup> webApplicationFactory)
         {
-            _webApplicationFactory = webApplicationFactory;
+            WebApplicationFactory = webApplicationFactory;
         }
 
-        [BeforeScenario]
+        [BeforeScenario(Order = 0)]
         public void InitializeWebClient()
         {
-            HttpClient = _webApplicationFactory.CreateClient(new WebApplicationFactoryClientOptions
+            HttpClient = WebApplicationFactory.CreateClient(new WebApplicationFactoryClientOptions
             {
                 BaseAddress = new Uri($"http://localhost/")
             });
