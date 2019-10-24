@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="autofixture" Version="4.11.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="fluentassertions" Version="5.9.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />

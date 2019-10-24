@@ -1,11 +1,11 @@
 ﻿using DemystifyingTdd.Api.Data;
+using DemystifyingTdd.Api.Handlers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
 namespace DemystifyingTdd.Api
 {
@@ -24,11 +24,13 @@ namespace DemystifyingTdd.Api
             // Use in-memory database for development and testing
             // todo: replace with real database
             services.AddDbContext<TddContext>(
-                options => options.UseInMemoryDatabase(Guid.NewGuid().ToString()));
+                options => options.UseInMemoryDatabase("InMemoryDb"));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddRouting(options => options.LowercaseUrls = true);
+
+            services.AddScoped<ICustomersHandler, EfCustomersHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

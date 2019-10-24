@@ -11,7 +11,7 @@ namespace DemystifyingTdd.Api.Models
         }
 
         public Guid Id { get; set; }
-        public IEnumerable<Subscription> Subscriptions { get; set; }
+        public List<Subscription> Subscriptions { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address { get; set; }

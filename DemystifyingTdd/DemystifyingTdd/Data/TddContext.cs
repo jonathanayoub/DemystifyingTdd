@@ -4,12 +4,12 @@ namespace DemystifyingTdd.Api.Data
 {
     public class TddContext : DbContext
     {
-        public TddContext(DbContextOptions options)
+        public TddContext(DbContextOptions<TddContext> options)
             : base(options)
         { }
 
-        public DbSet<CustomerEntity> Customers { get; set; }
-        public DbSet<SubscriptionEntity> Subscriptions { get; set; }
+        public virtual DbSet<CustomerEntity> Customers { get; set; }
+        public virtual DbSet<SubscriptionEntity> Subscriptions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
