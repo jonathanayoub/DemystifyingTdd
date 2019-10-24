@@ -1,4 +1,5 @@
-﻿using DemystifyingTdd.Api.Data;
+﻿using AutoMapper;
+using DemystifyingTdd.Api.Data;
 using DemystifyingTdd.Api.Handlers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -21,6 +22,8 @@ namespace DemystifyingTdd.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(Startup));
+
             // Use in-memory database for development and testing
             // todo: replace with real database
             services.AddDbContext<TddContext>(
